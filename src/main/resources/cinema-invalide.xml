@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cinema nom="Pathé Sfax">
+    <films>
+        <film id="f1" genre="SCIENCE_FICTION">
+            <titre>Inception</titre>
+            <realisateur>Christopher Nolan</realisateur>
+            <annee>2010</annee>
+            <dureeMinutes>148</dureeMinutes>
+            <note>15</note>
+            <enSalle>true</enSalle>
+        </film>
+        <film id="f2" genre="WESTERN">
+            <titre>Le Parrain</titre>
+            <realisateur>Francis Ford Coppola</realisateur>
+            <annee>1972</annee>
+            <dureeMinutes>175</dureeMinutes>
+            <note>9.2</note>
+            <enSalle>false</enSalle>
+        </film>
+        <film id="f3" genre="COMEDIE">
+            <titre>Intouchables</titre>
+            <realisateur>Olivier Nakache</realisateur>
+            <annee>2011</annee>
+            <dureeMinutes>112</dureeMinutes>
+            <note>8.5</note>
+            <enSalle>false</enSalle>
+        </film>
+        <film id="f4" genre="SCIENCE_FICTION">
+            <titre>Dune : Deuxième partie</titre>
+            <realisateur>Denis Villeneuve</realisateur>
+            <annee>2024</annee>
+            <dureeMinutes>166</dureeMinutes>
+            <note>8.5</note>
+            <enSalle>true</enSalle>
+        </film>
+        <film id="f5" genre="THRILLER">
+            <titre>Parasite</titre>
+            <realisateur>Bong Joon-ho</realisateur>
+            <annee>2019</annee>
+            <dureeMinutes>132</dureeMinutes>
+            <note>8.5</note>
+            <enSalle>true</enSalle>
+        </film>
+    </films>
+    <salles>
+        <salle id="s1">
+            <nom>Salle 1</nom>
+            <capacite>180</capacite>
+        </salle>
+        <salle id="s2">
+            <nom>Salle VIP</nom>
+            <capacite>60</capacite>
+        </salle>
+    </salles>
+    <seances>
+        <seance id="se1" filmRef="f1" salleRef="s1">
+            <date>2026-10-20</date>
+            <heure>18:00:00</heure>
+            <prix>12.5</prix>
+        </seance>
+        <seance id="se2" filmRef="f4" salleRef="s1">
+            <date>2026-10-20</date>
+            <heure>21:00:00</heure>
+            <prix>15.0</prix>
+        </seance>
+        <seance id="se3" filmRef="f5" salleRef="s2">
+            <date>2026-10-21</date>
+            <heure>20:30:00</heure>
+            <prix>25.0</prix>
+        </seance>
+        <seance id="se4" filmRef="f1" salleRef="s2">
+            <date>2026-10-21</date>
+            <heure>16:00:00</heure>
+            <prix>10.0</prix>
+        </seance>
+    </seances>
+    <spectateurs>
+        <spectateur id="sp1" actif="true">
+            <nom>Sarra Trabelsi</nom>
+            <email>sarra-sans-arobase</email>
+            <age>24</age>
+        </spectateur>
+        <spectateur id="sp2" actif="true">
+            <nom>Youssef Gharbi</nom>
+            <email>youssef.gharbi@example.com</email>
+            <age>31</age>
+        </spectateur>
+        <spectateur id="sp3" actif="false">
+            <nom>Mariem Ben Salah</nom>
+            <email>mariem.bensalah@example.com</email>
+            <age>19</age>
+        </spectateur>
+        <spectateur id="sp4" actif="true">
+            <nom>Ahmed Karray</nom>
+            <email>ahmed.karray@example.com</email>
+            <age>45</age>
+        </spectateur>
+    </spectateurs>
+    <reservations>
+        <reservation id="r1" spectateurRef="sp1" seanceRef="se1">
+            <nbPlaces>2</nbPlaces>
+        </reservation>
+        <reservation id="r2" spectateurRef="sp99" seanceRef="se1">
+            <nbPlaces>4</nbPlaces>
+        </reservation>
+        <reservation id="r3" spectateurRef="sp1" seanceRef="se3">
+            <nbPlaces>1</nbPlaces>
+        </reservation>
+        <reservation id="r4" spectateurRef="sp4" seanceRef="se2">
+            <nbPlaces>3</nbPlaces>
+        </reservation>
+        <reservation id="r5" spectateurRef="sp3" seanceRef="se4">
+            <nbPlaces>2</nbPlaces>
+        </reservation>
+    </reservations>
+</cinema>

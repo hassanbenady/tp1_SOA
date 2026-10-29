@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <!-- ===== Types simples ===== -->
+    <xs:simpleType name="GenreType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ACTION"/>
+            <xs:enumeration value="COMEDIE"/>
+            <xs:enumeration value="DRAME"/>
+            <xs:enumeration value="SCIENCE_FICTION"/>
+            <xs:enumeration value="THRILLER"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="AnneeType">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="1888"/>
+            <xs:maxInclusive value="2100"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="NoteType">
+        <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PrixType">
+        <xs:restriction base="xs:decimal">
+            <xs:minExclusive value="0"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="TexteNonVide">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EmailType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[^@\s]+@[^@\s]+\.[^@\s]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="AgeType">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="120"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- ===== Types complexes ===== -->
+    <xs:complexType name="FilmType">
+        <xs:sequence>
+            <xs:element name="titre" type="TexteNonVide"/>
+            <xs:element name="realisateur" type="TexteNonVide"/>
+            <xs:element name="annee" type="AnneeType"/>
+            <xs:element name="dureeMinutes" type="xs:positiveInteger"/>
+            <xs:element name="note" type="NoteType"/>
+            <xs:element name="enSalle" type="xs:boolean"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID" use="required"/>
+        <xs:attribute name="genre" type="GenreType" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="SalleType">
+        <xs:sequence>
+            <xs:element name="nom" type="TexteNonVide"/>
+            <xs:element name="capacite" type="xs:positiveInteger"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="SeanceType">
+        <xs:sequence>
+            <xs:element name="date" type="xs:date"/>
+            <xs:element name="heure" type="xs:time"/>
+            <xs:element name="prix" type="PrixType"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID" use="required"/>
+        <xs:attribute name="filmRef" type="xs:IDREF" use="required"/>
+        <xs:attribute name="salleRef" type="xs:IDREF" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="SpectateurType">
+        <xs:sequence>
+            <xs:element name="nom" type="TexteNonVide"/>
+            <xs:element name="email" type="EmailType"/>
+            <xs:element name="age" type="AgeType"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID" use="required"/>
+        <xs:attribute name="actif" type="xs:boolean" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="ReservationType">
+        <xs:sequence>
+            <xs:element name="nbPlaces" type="xs:positiveInteger"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID" use="required"/>
+        <xs:attribute name="spectateurRef" type="xs:IDREF" use="required"/>
+        <xs:attribute name="seanceRef" type="xs:IDREF" use="required"/>
+    </xs:complexType>
+
+    <!-- ===== Element racine ===== -->
+    <xs:element name="cinema">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="films">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="film" type="FilmType" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="salles">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="salle" type="SalleType" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="seances">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="seance" type="SeanceType" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="spectateurs">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="spectateur" type="SpectateurType" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="reservations">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="reservation" type="ReservationType" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="nom" type="xs:string" use="required"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
